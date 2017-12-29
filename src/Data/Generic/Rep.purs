@@ -13,7 +13,7 @@ module Data.Generic.Rep
   ) where
 
 import Data.Maybe (Maybe(..))
-import Prelude (Unit, unit)
+import Prelude (Unit, unit, (<<<))
 
 -- | A representation for types with no constructors.
 data NoConstructors
@@ -60,3 +60,8 @@ instance genericUnit
   :: Generic Unit (Constructor "Unit" NoArguments) where
   to (Constructor NoArguments) = unit
   from _ = Constructor NoArguments
+
+instance genericString
+  :: Generic String (Constructor "String" (Argument String)) where
+  to (Constructor (Argument s)) = s
+  from = Constructor <<< Argument
