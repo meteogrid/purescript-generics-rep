@@ -65,3 +65,8 @@ instance genericString
   :: Generic String (Constructor "String" (Argument String)) where
   to (Constructor (Argument s)) = s
   from = Constructor <<< Argument
+
+instance genericArray
+  :: Generic (Array a) (Constructor "Array" (Argument (Array a))) where
+  to (Constructor (Argument a)) = a
+  from = Constructor <<< Argument
